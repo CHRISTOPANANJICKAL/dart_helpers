@@ -3,21 +3,21 @@
 class Vlogger {
   static const String _resetCode = '\u001b[0m';
   final bool enable;
-  final LogColors defaultColor;
-  Vlogger({this.enable = true, this.defaultColor = LogColors.white});
+  final VlogColors defaultColor;
+  Vlogger({this.enable = true, this.defaultColor = VlogColors.white});
 
   /// ============================================== STRING CONSTANTS ==========================
   static const String _pattern = '―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――';
   final String _openPattern = '⬐$_pattern⬎\n';
   final String _closePattern = '\n⬑$_pattern⬏';
 
-  void log(String message, {LogColors? color, bool logLocation = false, bool logPattern = false}) {
+  void log(String message, {VlogColors? color, bool logLocation = false, bool logPattern = false}) {
     if (!enable) return;
 
     String output = '';
     if (logPattern) output = output + _openPattern;
     output = output + (color?.color ?? defaultColor.color) + message + _resetCode;
-    if (logLocation) output = '$output  🌳${LogColors.red.color}${_logCallingLocation()}🌳$_resetCode';
+    if (logLocation) output = '$output  🌳${VlogColors.red.color}${_logCallingLocation()}🌳$_resetCode';
     if (logPattern) output = output + _closePattern;
 
     // ignore: avoid_print
@@ -39,7 +39,7 @@ String _logCallingLocation() {
   }
 }
 
-enum LogColors {
+enum VlogColors {
   black(color: '\u001b[30m'),
   red(color: '\u001b[31m'),
   green(color: '\u001b[32m'),
@@ -52,7 +52,7 @@ enum LogColors {
   grey(color: '\u001b[90m'),
   ;
 
-  const LogColors({required this.color});
+  const VlogColors({required this.color});
 
   final String color;
 }

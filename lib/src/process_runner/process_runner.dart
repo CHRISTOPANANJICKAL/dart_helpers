@@ -23,17 +23,17 @@ class ProcessRunner {
     if (args.length > 1) args = args.sublist(1, args.length);
 
     try {
-      if (logOutput) logger.log(commandName ?? 'Running $text', color: LogColors.grey);
+      if (logOutput) logger.log(commandName ?? 'Running $text', color: VlogColors.grey);
 
       ProcessResult processResult = await Process.run(majorCommand, args, runInShell: true);
 
       if (processResult.stderr.toString().trim().isNotEmpty && !ignoreStdError) {
-        if (logOutput) logger.log('$text Failed', color: LogColors.red);
+        if (logOutput) logger.log('$text Failed', color: VlogColors.red);
         return ProcessOutput(success: false, error: '$text Failed. ${processResult.stderr.toString()}');
       }
       return ProcessOutput(success: true, output: processResult.stdout.toString());
     } catch (a) {
-      if (logOutput) logger.log('$text Failed. ${a.toString()}', color: LogColors.red);
+      if (logOutput) logger.log('$text Failed. ${a.toString()}', color: VlogColors.red);
       return ProcessOutput(success: false, error: '$text Failed');
     }
   }
