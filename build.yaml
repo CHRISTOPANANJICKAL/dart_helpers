@@ -1,10 +1,10 @@
 builders:
-  txt_file_builder:
+  app_version:
     import: "package:dart_helpers/builder.dart"
-    builder_factories: ["txtFileBuilder"]
+    builder_factories: ["appVersionBuilder"]
     build_extensions: {r"$package$": ["lib/gen/app_version.dart"]}
     auto_apply: root_package
     build_to: source
     defaults:
       options:
-        enabled: false
+        enabled: true

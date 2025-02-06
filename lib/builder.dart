@@ -3,10 +3,10 @@ import 'dart:io';
 
 import 'package:build/build.dart';
 
-class TxtFileGenerator implements Builder {
+class AppVersionGenerator implements Builder {
   final bool isEnabled;
 
-  TxtFileGenerator(this.isEnabled);
+  AppVersionGenerator(this.isEnabled);
 
   @override
   final buildExtensions = const {
@@ -64,7 +64,7 @@ class AppVersionUtils {
 }
 
 /// Factory function for build.yaml
-Builder txtFileBuilder(BuilderOptions options) {
+Builder appVersionBuilder(BuilderOptions options) {
   final isEnabled = options.config['enabled'] as bool? ?? false;
-  return TxtFileGenerator(isEnabled);
+  return AppVersionGenerator(isEnabled);
 }
