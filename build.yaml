@@ -1,7 +1,7 @@
 builders:
-  my_builder:
+  txt_file_builder:
     import: "package:dart_helpers/builder.dart"
-    builder_factories: ["appVersionBuilder"]
-    build_extensions: {".dart": [".generated.dart"]}
-    auto_apply: dependents
+    builder_factories: ["txtFileBuilder"]
+    build_extensions: {r"$package$": ["lib/gen/app_version.dart"]}
+    auto_apply: root_package
     build_to: source

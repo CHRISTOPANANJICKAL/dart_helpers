@@ -1,20 +1,34 @@
-// Created by: Christo Pananjickal, Created at: 06-02-2025 02:30 am
+import 'dart:async';
+import 'dart:io';
 
 import 'package:build/build.dart';
 
-Builder appVersionBuilder(BuilderOptions options) {
-  return AppVersionBuilder();
-}
-
-class AppVersionBuilder implements Builder {
+class TxtFileGenerator implements Builder {
   @override
-  Map<String, List<String>> get buildExtensions => {
-        '.dart': ['.generated.dart'],
-      };
+  final buildExtensions = const {
+    r'$package$': [filePath],
+  };
+
+  static const String filePath = 'lib/gen/app_version.dart';
 
   @override
   Future<void> build(BuildStep buildStep) async {
-    // Your function logic here
-    log.info('Build runner executed');
+    File file = File(filePath);
+
+    if (file.existsSync()) {
+      List<String> contents = file.readAsLinesSync();
+    }
+
+    await buildStep.writeAsString(
+      AssetId(buildStep.inputId.package, filePath),
+      '',
+    );
   }
+
+  static String contentString = '''
+
+  ''';
 }
+
+/// Factory function for build.yaml
+Builder txtFileBuilder(BuilderOptions options) => TxtFileGenerator();
