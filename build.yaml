@@ -1,0 +1,7 @@
+builders:
+  my_builder:
+    import: "package:dart_helpers/builder.dart"
+    builder_factories: ["appVersionBuilder"]
+    build_extensions: {".dart": [".generated.dart"]}
+    auto_apply: dependents
+    build_to: source

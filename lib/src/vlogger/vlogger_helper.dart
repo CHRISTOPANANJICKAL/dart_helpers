@@ -1,10 +1,10 @@
 // Created by: Christo Pananjickal, Created at: 06-02-2025 02:02 am
 
-class Logger {
+class Vlogger {
   static const String _resetCode = '\u001b[0m';
   final bool enable;
   final LogColors defaultColor;
-  Logger({this.enable = true, this.defaultColor = LogColors.white});
+  Vlogger({this.enable = true, this.defaultColor = LogColors.white});
 
   /// ============================================== STRING CONSTANTS ==========================
   static const String _pattern = '―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――';

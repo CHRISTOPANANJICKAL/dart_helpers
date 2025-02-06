@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:dart_helpers/dart_helpers.dart';
 
 class ProcessRunner {
-  Logger logger = Logger();
+  Vlogger logger = Vlogger();
   bool logOutput = false;
 
   Future<ProcessOutput> runProcess(String text, {String? commandName, bool ignoreStdError = false}) async {
@@ -27,7 +27,7 @@ class ProcessRunner {
 
       ProcessResult processResult = await Process.run(majorCommand, args, runInShell: true);
 
-      if (processResult.stderr.toString().isNotEmpty && !ignoreStdError) {
+      if (processResult.stderr.toString().trim().isNotEmpty && !ignoreStdError) {
         if (logOutput) logger.log('$text Failed', color: LogColors.red);
         return ProcessOutput(success: false, error: '$text Failed. ${processResult.stderr.toString()}');
       }
