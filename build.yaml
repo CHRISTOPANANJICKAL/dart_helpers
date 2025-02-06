@@ -5,3 +5,6 @@ builders:
     build_extensions: {r"$package$": ["lib/gen/app_version.dart"]}
     auto_apply: root_package
     build_to: source
+    defaults:
+      options:
+        enabled: false
