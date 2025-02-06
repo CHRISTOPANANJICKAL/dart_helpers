@@ -8,7 +8,7 @@ class ProcessRunner {
   Logger logger = Logger();
   bool logOutput = false;
 
-  Future<ProcessOutput> runProcess(String text, {String? customCommand, bool ignoreStdError = false}) async {
+  Future<ProcessOutput> runProcess(String text, {String? commandName, bool ignoreStdError = false}) async {
     List<String> args = [];
     RegExp regex = RegExp(r'"([^"]*)"|\S+');
     for (final match in regex.allMatches(text)) {
@@ -23,7 +23,7 @@ class ProcessRunner {
     if (args.length > 1) args = args.sublist(1, args.length);
 
     try {
-      if (logOutput) logger.log(customCommand ?? 'Running $text', color: LogColors.grey);
+      if (logOutput) logger.log(commandName ?? 'Running $text', color: LogColors.grey);
 
       ProcessResult processResult = await Process.run(majorCommand, args, runInShell: true);
 
