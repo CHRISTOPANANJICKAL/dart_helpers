@@ -39,10 +39,16 @@ class BuildTask {
     op = await ProcessRunner().runProcess('flutter pub get');
     if (!op.success) return op.error;
 
-    op = await ProcessRunner().runProcess('dart run build_runner build --delete-conflicting-outputs');
+    op = await ProcessRunner().runProcess(
+      'dart run build_runner build --delete-conflicting-outputs',
+      ignoreStdError: true,
+    );
     if (!op.success) return op.error;
 
-    op = await ProcessRunner().runProcess('flutter build windows --release --obfuscate --split-debug-info=debug-info');
+    op = await ProcessRunner().runProcess(
+      'flutter build windows --release --obfuscate --split-debug-info=debug-info',
+      ignoreStdError: true,
+    );
     if (!op.success) return op.error;
 
     Directory directory = Directory('debug-info');
