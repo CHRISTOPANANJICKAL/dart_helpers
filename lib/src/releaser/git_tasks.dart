@@ -16,16 +16,16 @@ class GitTasks {
     return error;
   }
 
-  static Future<String?> getCurrentBranch() async {
-    final result = await ProcessRunner().runProcess('git branch --show-current');
+  static Future<String?> getCurrentBranch({bool logCommand = true}) async {
+    final result = await ProcessRunner(logOutput: logCommand).runProcess('git branch --show-current');
     if (result.success) return result.output;
     Commander.command('Failed to get git branch: ${result.error?.toString()}');
     return null;
   }
 
-  static Future<bool> askCurrentBranchName() async {
+  static Future<bool> askCurrentBranchName({bool logBranchCommand = false}) async {
     String currentBranch = Commander.ask('  Type in current branch name to continue', color: VClr.subQuestion);
-    String? actualBranch = await getCurrentBranch();
+    String? actualBranch = await getCurrentBranch(logCommand: logBranchCommand);
     if (actualBranch == null) return false;
 
     if (currentBranch.toString().trim() == actualBranch.trim()) return true;

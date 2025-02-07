@@ -6,7 +6,9 @@ import 'package:dart_helpers/dart_helpers.dart';
 
 class ProcessRunner {
   Vlogger logger = Vlogger();
-  bool logOutput = true;
+
+  bool logOutput;
+  ProcessRunner({this.logOutput = true});
 
   Future<ProcessOutput> runProcess(String text, {String? commandName, bool ignoreStdError = false}) async {
     List<String> args = [];

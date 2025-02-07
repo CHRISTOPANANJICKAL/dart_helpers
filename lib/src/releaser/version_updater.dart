@@ -31,7 +31,9 @@ class AppVersionUpdater {
     versionFile.writeAsStringSync(lines.join('\r\n'));
 
     if (updateBuildNumberAlone) {
-      Commander.doing('App build number updated. ${fromVersion.versionTotal()} to ${toVersion.versionTotal()}');
+      CVersion v =
+          CVersion(maj: fromVersion.maj, min: fromVersion.maj, patch: fromVersion.patch, build: toVersion.patch);
+      Commander.doing('App build number updated. ${fromVersion.versionTotal()} to ${v.versionTotal()}');
     } else {
       Commander.doing('App version updated from ${fromVersion.versionTotal()} to ${toVersion.versionTotal()}');
     }
