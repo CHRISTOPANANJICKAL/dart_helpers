@@ -32,7 +32,7 @@ class AppVersionUpdater {
 
     if (updateBuildNumberAlone) {
       CVersion v =
-          CVersion(maj: fromVersion.maj, min: fromVersion.maj, patch: fromVersion.patch, build: toVersion.patch);
+          CVersion(maj: fromVersion.maj, min: fromVersion.maj, patch: fromVersion.patch, build: toVersion.build);
       Commander.doing('App build number updated. ${fromVersion.versionTotal()} to ${v.versionTotal()}');
     } else {
       Commander.doing('App version updated from ${fromVersion.versionTotal()} to ${toVersion.versionTotal()}');
