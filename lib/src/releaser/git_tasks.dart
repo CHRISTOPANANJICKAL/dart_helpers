@@ -28,7 +28,7 @@ class GitTasks {
     String? actualBranch = await getCurrentBranch();
     if (actualBranch == null) return false;
 
-    if (currentBranch.toString().trim() == actualBranch) return true;
+    if (currentBranch.toString().trim() == actualBranch.trim()) return true;
 
     return false;
   }
