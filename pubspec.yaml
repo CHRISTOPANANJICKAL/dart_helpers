@@ -9,6 +9,7 @@ environment:
 # Add regular dependencies here.
 dependencies:
   build: ^2.4.1
+  collection: ^1.18.0
 
 dev_dependencies:
   test: ^1.24.0
