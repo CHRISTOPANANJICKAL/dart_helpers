@@ -33,6 +33,8 @@ class AppVersionGenerator implements Builder {
   }
 
   static String contentString = '''
+// This file is auto-generated. DO NOT MODIFY BY HAND
+
 import 'package:dart_helpers/dart_helpers.dart';
 
 class AppVersionUtils {
