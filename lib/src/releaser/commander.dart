@@ -2,12 +2,14 @@
 
 import 'dart:io';
 
-import 'package:dart_helpers/dart_helpers.dart';
+import '../vlogger/vlogger.dart';
 
 class Commander {
   static Vlogger vlogger = Vlogger();
 
   static void say(String text, {VClr color = VClr.say}) => vlogger.log(text, color: color.color);
+
+  static void command(String text, {VClr color = VClr.command}) => say(text, color: color);
 
   static void doing(String text) => say(text, color: VClr.action);
 
@@ -33,6 +35,7 @@ enum VClr {
   question(color: VlogColors.magenta),
   subQuestion(color: VlogColors.green),
   say(color: VlogColors.yellow),
+  command(color: VlogColors.red),
   action(color: VlogColors.grey),
   ;
 
