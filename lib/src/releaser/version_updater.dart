@@ -11,6 +11,7 @@ class AppVersionUpdater {
     required CVersion fromVersion,
     required CVersion toVersion,
     String? filePath,
+    bool updateBuildNumberAlone = false,
   }) {
     filePath = filePath ?? 'lib/gen/app_version.dart';
 
@@ -21,14 +22,19 @@ class AppVersionUpdater {
     String? versionLine = lines.firstWhereOrNull((e) => e.contains('static CVersion _version = CVersion('));
     if (versionLine == null) return 'Version line not found';
     int versionLineIndex = lines.indexOf(versionLine);
-    String newVersionLine =
-        '  static CVersion _version = CVersion(maj: ${toVersion.maj}, min: ${toVersion.min}, patch: ${toVersion.patch}, build: ${toVersion.build});';
+    String newVersionLine = updateBuildNumberAlone
+        ? '  static CVersion _version = CVersion(maj: ${fromVersion.maj}, min: ${fromVersion.min}, patch: ${fromVersion.patch}, build: ${toVersion.build});'
+        : '  static CVersion _version = CVersion(maj: ${toVersion.maj}, min: ${toVersion.min}, patch: ${toVersion.patch}, build: ${toVersion.build});';
 
     lines[versionLineIndex] = newVersionLine;
 
     versionFile.writeAsStringSync(lines.join('\r\n'));
 
-    Commander.doing('App version updated from ${fromVersion.versionTotal()} to ${toVersion.versionTotal()}');
+    if (updateBuildNumberAlone) {
+      Commander.doing('App build number updated. ${fromVersion.versionTotal()} to ${toVersion.versionTotal()}');
+    } else {
+      Commander.doing('App version updated from ${fromVersion.versionTotal()} to ${toVersion.versionTotal()}');
+    }
 
     return null;
   }
