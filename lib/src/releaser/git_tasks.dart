@@ -36,7 +36,8 @@ class GitTasks {
   static Future<String?> createTag({required CVersion version, required String message}) async {
     String versionSummary = '${version.versionString()}.${version.build}';
 
-    final op = await ProcessRunner().runProcess('git tag -a $versionSummary -m "$message"');
+    final op = await ProcessRunner()
+        .runProcess('git tag -a $versionSummary -m "$message"', commandName: 'Creating tag $versionSummary');
     return op.error;
   }
 
@@ -49,6 +50,7 @@ class GitTasks {
 
     final op = await ProcessRunner().runProcess(
       'gh release create $versionSummary "${boxedFile.absolute.path}" --title "${version.versionTotal()}" --notes "This is version ${version.versionTotal()}" --target "$branch"',
+      commandName: 'Pushing release $versionSummary',
     );
     return op.error;
   }
