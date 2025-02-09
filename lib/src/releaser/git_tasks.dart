@@ -16,6 +16,11 @@ class GitTasks {
     return error;
   }
 
+  static Future<String?> pushCommits() async {
+    final op = await ProcessRunner().runProcess('git push');
+    return op.error;
+  }
+
   static Future<String?> getCurrentBranch({bool logCommand = true}) async {
     final result = await ProcessRunner(logOutput: logCommand).runProcess('git branch --show-current');
     if (result.success) return result.output;
