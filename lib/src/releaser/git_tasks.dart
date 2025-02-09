@@ -17,7 +17,9 @@ class GitTasks {
   }
 
   static Future<String?> pushCommits() async {
-    final op = await ProcessRunner().runProcess('git push');
+    Commander.doing('Running git push');
+    final op = await ProcessRunner(logOutput: false).runProcess('git push');
+    if ((op.error ?? '').contains('Everything up-to-date')) return null;
     return op.error;
   }
 
