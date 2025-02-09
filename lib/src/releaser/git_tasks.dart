@@ -19,8 +19,15 @@ class GitTasks {
   static Future<String?> pushCommits() async {
     Commander.doing('Running git push');
     final op = await ProcessRunner(logOutput: false).runProcess('git push');
-    if ((op.error ?? '').contains('Everything up-to-date')) return null;
-    return op.error;
+    String? error = op.error;
+    if (error != null) {
+      error = error.trim();
+      if (error.contains('Everything up-to-date')) return null;
+      if (error.contains('->')) return null;
+    }
+
+    if (error != null && error.trim().isEmpty) return null;
+    return error;
   }
 
   static Future<String?> getCurrentBranch({bool logCommand = true}) async {
