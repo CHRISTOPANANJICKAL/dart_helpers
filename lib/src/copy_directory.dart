@@ -18,7 +18,6 @@ class CopyTasks {
         } else if (file is Link) {
           await Link(copyTo).create(await file.target(), recursive: true);
         }
-        await Future.delayed(Duration(milliseconds: 50));
       }
       return null;
     } catch (e) {
