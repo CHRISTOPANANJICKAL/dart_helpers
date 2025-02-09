@@ -6,7 +6,10 @@ environment:
   sdk: ^3.5.3
 
 dependencies:
-  collection: ^1.18.0
+  dio: ^5.8.0+1
+  collection: ^1.19.1
+  path: ^1.8.0
+
 
 dev_dependencies:
   test: ^1.24.0
