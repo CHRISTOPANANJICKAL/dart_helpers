@@ -6,7 +6,7 @@ import 'package:dart_helpers/dart_helpers.dart';
 
 class BuildTask {
   static Future<bool> checkFlutterVersion({required String flutterVersion}) async {
-    final result = await ProcessRunner().runProcess('flutter --version', commandName: 'Checking flutter version');
+    final result = await ProcessRunner().runProcess('fvm flutter --version', commandName: 'Checking flutter version');
 
     if (!result.success) {
       Commander.command('Failed to get flutter version');
@@ -33,10 +33,10 @@ class BuildTask {
       if (!correctVersion) return 'Flutter version is not $flutterVersion';
     }
 
-    ProcessOutput op = await ProcessRunner().runProcess('flutter clean');
+    ProcessOutput op = await ProcessRunner().runProcess('fvm flutter clean');
     if (!op.success) return op.error;
 
-    op = await ProcessRunner().runProcess('flutter pub get');
+    op = await ProcessRunner().runProcess('fvm flutter pub get');
     if (!op.success) return op.error;
 
     op = await ProcessRunner().runProcess(
@@ -46,7 +46,7 @@ class BuildTask {
     if (!op.success) return op.error;
 
     op = await ProcessRunner().runProcess(
-      'flutter build windows --release --obfuscate --split-debug-info=debug-info',
+      'fvm flutter build windows --release --obfuscate --split-debug-info=debug-info',
       ignoreStdError: true,
     );
     if (!op.success) return op.error;
