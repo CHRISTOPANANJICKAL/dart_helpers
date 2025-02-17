@@ -1,6 +1,7 @@
 library;
 
 export 'src/copy_directory.dart';
+export 'src/encrypt/encrypt_helper.dart';
 export 'src/process_runner/process_runner.dart';
 export 'src/releaser/build_task.dart';
 export 'src/releaser/commander.dart';
