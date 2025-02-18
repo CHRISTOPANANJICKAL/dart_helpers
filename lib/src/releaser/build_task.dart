@@ -40,7 +40,7 @@ class BuildTask {
     if (!op.success) return op.error;
 
     op = await ProcessRunner().runProcess(
-      'dart run build_runner build --delete-conflicting-outputs',
+      'fvm dart run build_runner build --delete-conflicting-outputs',
       ignoreStdError: true,
     );
     if (!op.success) return op.error;
