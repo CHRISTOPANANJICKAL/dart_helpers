@@ -29,4 +29,8 @@ class EncryptHelper {
   static String _generateKey(String password) {
     return sha256.convert(utf8.encode(password)).toString().substring(0, 32);
   }
+
+  static void testPrint() {
+    print('Hello');
+  }
 }
