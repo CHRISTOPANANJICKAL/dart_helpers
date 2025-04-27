@@ -31,6 +31,6 @@ class EncryptHelper {
   }
 
   static void testPrint() {
-    print('Hello world');
+    print('Hello world 123');
   }
 }
