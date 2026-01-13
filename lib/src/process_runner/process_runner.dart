@@ -10,7 +10,8 @@ class ProcessRunner {
   bool logOutput;
   ProcessRunner({this.logOutput = true});
 
-  Future<ProcessOutput> runProcess(String text, {String? commandName, bool ignoreStdError = false}) async {
+  Future<ProcessOutput> runProcess(String text, {String? commandName, bool ignoreStdError = false,
+  String? workingDirectory}) async {
     List<String> args = [];
     RegExp regex = RegExp(r'"([^"]*)"|\S+');
     for (final match in regex.allMatches(text)) {
@@ -27,7 +28,7 @@ class ProcessRunner {
     try {
       if (logOutput) logger.log(commandName ?? 'Running $text', color: VlogColors.grey);
 
-      ProcessResult processResult = await Process.run(majorCommand, args, runInShell: true);
+      ProcessResult processResult = await Process.run(majorCommand, args, runInShell: true,workingDirectory: workingDirectory);
 
       if (processResult.stderr.toString().trim().isNotEmpty && !ignoreStdError) {
         if (logOutput) logger.log('$text Failed', color: VlogColors.red);
