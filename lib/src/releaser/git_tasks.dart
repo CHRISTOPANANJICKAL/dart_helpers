@@ -22,7 +22,7 @@ class GitTasks {
     return error;
   }
 
-  static Future<String?> pushCommits(String? workingDirectory) async {
+  static Future<String?> pushCommits({String? workingDirectory}) async {
     Commander.doing('Running git push');
     final op = await ProcessRunner(logOutput: false).runProcess('git push', workingDirectory: workingDirectory);
     String? error = op.error;
