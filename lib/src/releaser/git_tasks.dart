@@ -141,4 +141,35 @@ class GitTasks {
     if (op.output != null) op.output = op.output!.trim();
     return op;
   }
+
+  Future<String?> runGitPull(String workingDirectory) async {
+    Commander.doing('Running git pull');
+    final op = await ProcessRunner(logOutput: false).runProcess('git pull', workingDirectory: workingDirectory);
+    String? error = op.error;
+    if (error != null) {
+      error = error.trim();
+      if (error.contains('Already up to date')) return null;
+      if (error.contains('Already up-to-date')) return null;
+      if (error.contains('Fast-forward')) return null;
+      if (error.contains('Updating')) return null;
+      if (error.contains('->')) return null;
+    }
+    if (error != null && error.isEmpty) return null;
+    return error;
+  }
+
+  Future<String?> runGitClone({required String repoUrl,required String targetDir}) async {
+    Commander.doing('Running git clone');
+    final op = await ProcessRunner(logOutput: false).runProcess('git clone $repoUrl "$targetDir"');
+    String? error = op.error;
+    if (error != null) {
+      error = error.trim();
+      if (error.contains('Cloning into')) return null;
+      if (error.contains('Enumerating objects')) return null;
+      if (error.contains('Receiving objects')) return null;
+      if (error.contains('Resolving deltas')) return null;
+    }
+    if (error != null && error.isEmpty) return null;
+    return error;
+  }
 }
