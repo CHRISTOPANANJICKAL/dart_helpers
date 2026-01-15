@@ -142,7 +142,7 @@ class GitTasks {
     return op;
   }
 
-  Future<String?> runGitPull(String workingDirectory) async {
+  static Future<String?> runGitPull(String workingDirectory) async {
     Commander.doing('Running git pull');
     final op = await ProcessRunner(logOutput: false).runProcess('git pull', workingDirectory: workingDirectory);
     String? error = op.error;
@@ -158,7 +158,7 @@ class GitTasks {
     return error;
   }
 
-  Future<String?> runGitClone({required String repoUrl,required String targetDir}) async {
+  static Future<String?> runGitClone({required String repoUrl,required String targetDir}) async {
     Commander.doing('Running git clone');
     final op = await ProcessRunner(logOutput: false).runProcess('git clone $repoUrl "$targetDir"');
     String? error = op.error;
